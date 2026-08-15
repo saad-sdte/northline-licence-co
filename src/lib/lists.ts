@@ -183,7 +183,16 @@ export const GENDERS = ["Male", "Female", "Non-binary", "Prefer not to say"] as 
 
 export const EYE_COLOURS = ["Black", "Blue", "Brown", "Green", "Hazel", "Grey", "Other"] as const;
 
-export const HAIR_COLOURS = ["Black", "Brown", "Blonde", "Red", "Grey", "White", "Other"] as const;
+export const HAIR_COLOURS = [
+  "Auburn",
+  "Black",
+  "Brown",
+  "Bald",
+  "Red",
+  "Blonde",
+  "Grey",
+  "White",
+] as const;
 
 export const FAVOURITE_COLOURS = ["Red", "Blue", "Yellow", "Green", "Orange"] as const;
 

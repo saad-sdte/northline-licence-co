@@ -1,69 +1,153 @@
+import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, Headphones, Landmark, Map, Radio, ShieldCheck, Zap } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
+import { PROVINCES } from "@/lib/provinces";
+import { KNOWLEDGE, WHY_US } from "@/lib/copy";
 
-export default function Home() {
+const ICONS = [Landmark, Radio, Zap, ShieldCheck, Map, Headphones];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <>
+      <section className="relative min-h-[520px] flex items-center justify-center overflow-hidden">
+        <Image src="/fishing-hero.jpg" alt="" fill sizes="100vw" className="object-cover" priority />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative container mx-auto px-4 text-center max-w-3xl py-20">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4 leading-none">
+            Your Trusted Guide to Canadian Fishing Waters
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-white/90 mb-8">
+            Navigate fishing regulations with confidence across Canada&apos;s most productive provinces.
+            Expert consultancy, up-to-date intelligence, and personalized advisory.
           </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/apply" className="bg-white text-foreground px-5 py-2.5 text-sm font-semibold">
+              BOOK CONSULTATION
+            </Link>
+            <Link href="/contact" className="border border-white text-white px-5 py-2.5 text-sm font-semibold">
+              CONTACT US
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="font-heading text-3xl font-bold text-center mb-2">Why Choose Us</h2>
+          <p className="text-center text-muted-foreground mb-10">
+            Professional advisory built on regulatory expertise and a commitment to every angler&apos;s success.
+          </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            {WHY_US.map((item, i) => {
+              const Icon = ICONS[i];
+              return (
+                <div key={item.title} className="gov-card rounded p-5">
+                  <Icon className="w-6 h-6 text-gov-red mb-3" />
+                  <h3 className="font-heading text-lg font-semibold mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.body}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="font-heading text-3xl font-bold text-center mb-2">Our Covered Provinces</h2>
+          <p className="text-center text-muted-foreground mb-10">
+            Expert advisory across eight of Canada&apos;s premier fishing destinations.
+          </p>
+          <div className="grid md:grid-cols-4 gap-4">
+            {PROVINCES.map((p) => (
+              <div key={p.code} className="gov-card rounded p-5">
+                <span className="inline-block bg-secondary text-secondary-foreground text-xs font-bold px-2 py-1 mb-3">
+                  {p.code}
+                </span>
+                <h3 className="font-heading text-lg font-semibold mb-2">{p.name}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{p.description}</p>
+                <Link href="/apply" className="text-sm text-gov-link inline-flex items-center gap-1">
+                  Book Consultation <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <h2 className="font-heading text-3xl font-bold text-center mb-2">Knowledge Centre</h2>
+          <p className="text-center text-muted-foreground mb-10">
+            Essential information for every angler navigating Canada&apos;s fishing regulations.
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            {KNOWLEDGE.map((item) => (
+              <div key={item.title} className="bg-card border border-border border-t-2 border-t-gov-red rounded p-5">
+                <h3 className="font-heading text-lg font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="text-gov-red text-xs font-semibold tracking-widest uppercase mb-2">About Us</p>
+            <h2 className="font-heading text-3xl font-bold mb-4">Who We Are</h2>
+            <p className="text-sm text-muted-foreground mb-5">
+              Our dedicated team is committed to offering a comprehensive range of services to support fishing
+              enthusiasts in their pursuits. With a deep understanding of the intricacies of fishing licences and
+              regulations across various provinces in Canada, we stand as your trusted resource for all matters
+              related to fishing.
+            </p>
+            <ul className="space-y-2 text-sm">
+              {[
+                "How to use your Fishing Licence",
+                "Application procedures",
+                "Different types of Fishing Licence",
+                "Fishing regulations and laws",
+                "Advantages and benefits",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <span className="text-gov-red">•</span> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded">
+            <Image src="/fishing-about.jpg" alt="Angler with catch in Canadian river" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-xl">
+          <h2 className="font-heading text-3xl font-bold text-center mb-2">Have Questions?</h2>
+          <p className="text-center text-muted-foreground mb-8">
+            Send us a message and we&apos;ll get back to you within 1–2 business days.
+          </p>
+          <ContactForm />
+        </div>
+      </section>
+
+      <section className="gov-banner py-14">
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <h2 className="font-heading text-3xl font-bold mb-3">Ready to Get Expert Guidance?</h2>
+          <p className="opacity-90 mb-6">
+            Start your consultation today and let our advisors handle the complexity of fishing regulations for you.
+          </p>
+          <Link
+            href="/apply"
+            className="inline-flex items-center gap-2 bg-white text-foreground px-5 py-2.5 text-sm font-semibold"
+          >
+            BOOK CONSULTATION <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }

@@ -95,6 +95,19 @@ h3,
 .gov-btn-primary {
   background-color: hsl(var(--gov-green));
   color: hsl(var(--primary-foreground));
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 @media (hover: hover) {
@@ -121,4 +134,23 @@ h3,
 
 .field::placeholder {
   color: hsl(var(--muted-foreground));
+}
+
+.taa-collect-field {
+  width: 100%;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.taa-collect-field:focus-within {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(155 55% 22% / 0.3);
+}
+
+.taa-collect-field-error {
+  border-color: hsl(var(--destructive));
 }
