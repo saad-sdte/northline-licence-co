@@ -199,7 +199,7 @@ export const PROVINCES: Province[] = [
     validity: "April 1 – March 31",
     specialNotes:
       "Angling licence includes up to 2 children under 16. Free fishing week in June. Conservation licence available with reduced limits.",
-    licenceCount: 9,
+    licenceCount: 6,
     requiresPhysicalId: true,
     residencyOptions: [
       { value: "resident", label: "Manitoba Resident" },
@@ -208,14 +208,11 @@ export const PROVINCES: Province[] = [
     ],
     licences: [
       { name: "1-Day Fishing Licence", price: "US $29.95 – CA $41.00", eligibility: "Valid for selected date", category: "fishing", residency: "resident" },
-      { name: "Annual Fishing Licence 2025 (valid until 2026-04-30)", price: "US $49.95 – CA $69.00", eligibility: "Valid until Apr 30, 2026", category: "fishing", residency: "resident" },
-      { name: "Annual Fishing Licence 2026 (valid until 2027-04-30) — Reserve", price: "US $49.95 – CA $69.00", eligibility: "Coming soon — reserve now", category: "fishing", residency: "resident" },
+      { name: "Annual Fishing Licence 2026 (valid until 2027-04-30)", price: "US $49.95 – CA $69.00", eligibility: "Valid until Apr 30, 2027", category: "fishing", residency: "resident" },
       { name: "1-Day Fishing Licence", price: "US $39.95 – CA $55.00", eligibility: "Valid for selected date", category: "fishing", residency: "canadian-resident" },
-      { name: "Annual Fishing Licence 2025 (valid until 2026-04-30)", price: "US $89.95 – CA $123.00", eligibility: "Valid until Apr 30, 2026", category: "fishing", residency: "canadian-resident" },
-      { name: "Annual Fishing Licence 2026 (valid until 2027-04-30) — Reserve", price: "US $89.95 – CA $123.00", eligibility: "Coming soon — reserve now", category: "fishing", residency: "canadian-resident" },
+      { name: "Annual Fishing Licence 2026 (valid until 2027-04-30)", price: "US $89.95 – CA $123.00", eligibility: "Valid until Apr 30, 2027", category: "fishing", residency: "canadian-resident" },
       { name: "1-Day Fishing Licence", price: "US $39.95 – CA $55.00", eligibility: "Valid for selected date", category: "fishing", residency: "non-resident" },
-      { name: "Annual Fishing Licence 2025 (valid until 2026-04-30)", price: "US $89.95 – CA $123.00", eligibility: "Valid until Apr 30, 2026", category: "fishing", residency: "non-resident" },
-      { name: "Annual Fishing Licence 2026 (valid until 2027-04-30) — Reserve", price: "US $89.95 – CA $123.00", eligibility: "Coming soon — reserve now", category: "fishing", residency: "non-resident" },
+      { name: "Annual Fishing Licence 2026 (valid until 2027-04-30)", price: "US $89.95 – CA $123.00", eligibility: "Valid until Apr 30, 2027", category: "fishing", residency: "non-resident" },
     ],
     idRequirements: [
       {

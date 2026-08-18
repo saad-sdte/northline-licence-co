@@ -78,7 +78,7 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
 }
 
 function needsStartDate(licence: Licence | null) {
-  return licence ? /\b\d+-day/i.test(licence.name) : false;
+  return licence ? /\b\d+[-\s]days?\b/i.test(licence.name) : false;
 }
 
 function homeProvinceName(code: string) {
