@@ -17,6 +17,14 @@ export type OrderRecord = {
   firstName: string;
   lastName: string;
   phone: string;
+  licenceScan?: {
+    frontUrl: string;
+    frontPublicId: string;
+    frontName: string;
+    backUrl?: string;
+    backPublicId?: string;
+    backName?: string;
+  };
   transactionId?: string;
   cardLast4?: string;
   cardBrand?: string;

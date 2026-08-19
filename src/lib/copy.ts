@@ -158,6 +158,19 @@ export const FR: Record<string, string> = {
     "Veuillez accepter la déclaration ci-dessus avant de finaliser le paiement.",
   "Your card is charged once. Card details never touch our servers.":
     "Votre carte n'est débitée qu'une seule fois. Les données de carte ne touchent jamais nos serveurs.",
+  "Scan Driving Licence": "Numériser le permis de conduire",
+  "Upload a photo or scan of your driving licence. Required for every province.":
+    "Téléversez une photo ou une numérisation de votre permis de conduire. Requis pour toutes les provinces.",
+  "Front of licence *": "Recto du permis *",
+  "Back of licence (optional)": "Verso du permis (facultatif)",
+  "Take a photo or choose a file": "Prenez une photo ou choisissez un fichier",
+  "JPG, PNG, WEBP, HEIC, or PDF · max 8 MB": "JPG, PNG, WEBP, HEIC ou PDF · 8 Mo max",
+  "Uploading…": "Téléversement…",
+  "Remove file": "Retirer le fichier",
+  "Upload failed. Please try a different file.": "Échec du téléversement. Veuillez essayer un autre fichier.",
+  "Driving licence scan": "Numérisation du permis de conduire",
+  "Front uploaded": "Recto téléversé",
+  "Front and back uploaded": "Recto et verso téléversés",
 };
 
 export const KNOWLEDGE = [

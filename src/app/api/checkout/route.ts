@@ -7,6 +7,7 @@ import {
   type CheckoutApplicant,
 } from "@/lib/checkout";
 import { markOrderFailed, markOrderPaid, saveOrder } from "@/lib/orders";
+import { parseScanAsset } from "@/lib/documents";
 import type { Residency } from "@/lib/provinces";
 
 export const runtime = "nodejs";
@@ -89,6 +90,21 @@ export async function POST(request: Request) {
   const licencePrice = str(raw.licencePrice);
   const walleye = str(raw.walleye) || undefined;
   const salmonStamp = raw.salmonStamp === true;
+  const scanRaw = (raw.licenceScan ?? {}) as Record<string, unknown>;
+  const frontScan = parseScanAsset(scanRaw, "front");
+  if (!frontScan) {
+    return NextResponse.json(
+      { ok: false, message: "Please scan or upload the front of your driving licence." },
+      { status: 400 },
+    );
+  }
+  const backScan = parseScanAsset(scanRaw, "back");
+  if (backScan === null) {
+    return NextResponse.json(
+      { ok: false, message: "The back-of-licence scan could not be verified. Please upload it again." },
+      { status: 400 },
+    );
+  }
 
   const amount = computeCheckoutAmount({
     provinceSlug,
@@ -118,6 +134,14 @@ export async function POST(request: Request) {
     firstName: applicant.firstName,
     lastName: applicant.lastName,
     phone: applicant.phone,
+    licenceScan: {
+      frontUrl: frontScan.url,
+      frontPublicId: frontScan.publicId,
+      frontName: frontScan.name,
+      backUrl: backScan?.url,
+      backPublicId: backScan?.publicId,
+      backName: backScan?.name,
+    },
     descriptor: NMI_DESCRIPTOR,
     createdAt: new Date().toISOString(),
   });

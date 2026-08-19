@@ -15,6 +15,7 @@ import {
 } from "@/lib/provinces";
 import { STEPS, DECLARATIONS, GENERIC_DECLARATION, FR } from "@/lib/copy";
 import { PaymentStep } from "@/components/PaymentStep";
+import { ScanDrivingLicence, type ScanFile } from "@/components/ScanDrivingLicence";
 import type { TokenizedPayment } from "@/lib/checkout";
 import {
   ADDRESS_COUNTRIES,
@@ -107,6 +108,8 @@ export function ApplyWizard({ initialSlug, basePath = "/services/apply" }: Props
   );
   const [paying, setPaying] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [scanFront, setScanFront] = useState<ScanFile | null>(null);
+  const [scanBack, setScanBack] = useState<ScanFile | null>(null);
 
   const t = (s: string) => (province?.code === "QC" && lang === "fr" && FR[s] ? FR[s] : s);
 
@@ -135,6 +138,8 @@ export function ApplyWizard({ initialSlug, basePath = "/services/apply" }: Props
     else setLicence(null);
     setWalleye("none");
     setSalmonStamp(false);
+    setScanFront(null);
+    setScanBack(null);
     setApp((a) => ({ ...a, licenceStartDate: "" }));
   }, [residency, province?.code]);
 
@@ -218,6 +223,7 @@ export function ApplyWizard({ initialSlug, basePath = "/services/apply" }: Props
       }
       if (needsStartDate(licence) && !app.licenceStartDate) next.push("Licence start date is required");
     }
+    if (step >= 1 && !scanFront) next.push("Please scan or upload the front of your driving licence");
     if (step === 2) {
       if (!app.firstName.trim()) next.push("First name is required");
       if (!app.lastName.trim()) next.push("Last name is required");
@@ -306,6 +312,14 @@ export function ApplyWizard({ initialSlug, basePath = "/services/apply" }: Props
           licencePrice: licence.price,
           walleye,
           salmonStamp,
+          licenceScan: {
+            frontUrl: scanFront?.url,
+            frontPublicId: scanFront?.publicId,
+            frontName: scanFront?.name,
+            backUrl: scanBack?.url,
+            backPublicId: scanBack?.publicId,
+            backName: scanBack?.name,
+          },
           agreed,
           applicant: {
             firstName: app.firstName,
@@ -659,6 +673,16 @@ export function ApplyWizard({ initialSlug, basePath = "/services/apply" }: Props
                   </div>
                 )}
               </div>
+            )}
+
+            {residency && (
+              <ScanDrivingLicence
+                front={scanFront}
+                back={scanBack}
+                onFront={setScanFront}
+                onBack={setScanBack}
+                t={t}
+              />
             )}
 
             {residency && licences.length > 0 && (
@@ -1030,6 +1054,12 @@ export function ApplyWizard({ initialSlug, basePath = "/services/apply" }: Props
               </p>
               <p>
                 <span className="text-muted-foreground">{t("Province")}:</span> {province.name}
+              </p>
+              <p>
+                <span className="text-muted-foreground">{t("Driving licence scan")}:</span>{" "}
+                {scanBack
+                  ? t("Front and back uploaded")
+                  : t("Front uploaded")}
               </p>
               <p className="pt-3 border-t border-border font-heading text-lg font-bold flex justify-between">
                 <span>{t("Total Due")}</span>

@@ -25,6 +25,12 @@ export type CheckoutPayload = {
   agreed: boolean;
   applicant: CheckoutApplicant;
   payment: TokenizedPayment;
+  licenceScan?: {
+    frontUrl: string;
+    frontPublicId?: string;
+    backUrl?: string;
+    backPublicId?: string;
+  };
 };
 
 const RESIDENCIES: Residency[] = ["resident", "canadian-resident", "non-resident"];
